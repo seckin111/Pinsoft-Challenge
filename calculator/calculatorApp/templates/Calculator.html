@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <meta name="viewport" content="witdth=device-width",inital-scale=1.0>
+        <title>Calculator</title>
+        <link rel="stylesheet" href="style.css">
+        <style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				font-family: 'Poppins',sans-serif;
+				box-sizing: border-box;
+			}
+			
+			.container{
+				width: 100%;
+				height: 100vh;
+				background: rgba(121, 109, 60, 0.362);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.calculator{
+				background: rgb(62, 62, 62);
+				padding: 20px;
+				border-radius: 10px;
+			
+			}
+			.calculator form input{
+				border: 0;
+				outline: 0;
+				width: 60px;
+				height: 60px;
+				border-radius: 10px;
+				box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1),5px 5px 10px rgba(213, 255, 253, 0.125);
+				background:transparent ;
+				font-size: 20px;
+				color: white;
+				cursor: pointer;
+				margin: 10px;
+			}
+			form .display{
+				display: flex;
+				justify-content: flex-end;
+				margin: 20px 0;
+				background-color: white;
+				border-radius: 10px;
+			}
+			#sonuc{
+				text-align: right;
+				flex: 1;
+				font-size: 45px;
+				box-shadow: none;
+				color: black;
+			
+			
+			}
+			
+			form .display input{
+				text-align: right;
+				flex: 1;
+				font-size: 45px;
+				box-shadow: none;
+				color: black;
+			
+			}
+			form input.equal{
+				width: 145px;
+			}
+		</style>
+		
+		<script type="text/javascript">
+            function evaluateee(b) {
+                var values = b.split(" ");
+                var array = new Array();
+
+                for (i in values) {
+                    if (values[i] != "+" && values[i] != "*" && values[i] != "-" && values[i] != "/") {
+                        array.push(parseInt(values[i]));
+                    } 
+                    else {
+                        var operator = values[i];
+                        var val2 = array.pop();
+                        var val1 = array.pop();
+                        switch (operator) {
+                            case "+":
+                                array.push(eval("val1 + val2"));
+                                break;
+                            case "*":
+                                array.push(eval("val1 * val2"));
+                                break;
+                            case "-":
+                                array.push(eval("val1 - val2"));
+                                break;
+                            case "/":
+                                array.push(eval("val1 / val2"));
+                                break;
+                        }
+                    }
+                }
+               document.getElementById("sonuc").innerHTML=array;    
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+        <div class="calculator">
+            <form >
+                <div class="display" id="sonuc">
+                    <input type="text" name="display" id="text" >
+                </div>
+                <div>
+                    <input type="button" value="AC" onclick="display.value = '' ">
+                    <input type="button" value="RPN" id="RPN" onclick="evaluateee(display.value)">
+                    <input type="button" value="." onclick="display.value += '.'">
+                    <input type="button" value="/" onclick="display.value += '/'">
+                </div>
+                <div>
+                    <input type="button" value="7" onclick="display.value += '7' ">
+                    <input type="button" value="8" onclick="display.value += '8'">
+                    <input type="button" value="9" onclick="display.value += '9'">
+                    <input type="button" value="*" onclick="display.value += '*'">
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="display.value += '4'">
+                    <input type="button" value="5" onclick="display.value += '5'">
+                    <input type="button" value="6" onclick="display.value += '6'">
+                    <input type="button" value="-" onclick="display.value += '-'">
+                </div>
+                <div>
+                    <input type="button" value="1" onclick="display.value += '1'">
+                    <input type="button" value="2" onclick="display.value += '2'">
+                    <input type="button" value="3" onclick="display.value += '3'">
+                    <input type="button" value="+" onclick="display.value += '+'">
+                </div>
+                <div>
+                    <input type="button" value="00" onclick="display.value += '00'">
+                    <input type="button" value="0" onclick="display.value += '0'">
+                    <input type="button" value="=" onclick="display.value=eval(display.value)" class="equal">
+                </div>
+            </form>
+        </div>
+    </div> 
+    </body>
+</html>
